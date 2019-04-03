@@ -10,6 +10,10 @@
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -345,6 +349,46 @@
                 android:layout_weight="1"
                 android:text="Gauss-Seidel" />
         </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="70px"
+            android:gravity="center"
+            android:text="Results"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/resultx1"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:gravity="center_vertical"
+            android:text="X1 = "
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/resultx2"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:gravity="center_vertical"
+            android:text="X2 = "
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/resultx3"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:gravity="center_vertical"
+            android:text="X3 = "
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/botonCalcular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            android:textAllCaps="true" />
 
     </LinearLayout>
 
