@@ -12,12 +12,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="8dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView"
@@ -107,7 +110,7 @@
                 android:inputType="number" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView34"
                 android:layout_width="5px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -123,7 +126,7 @@
                 android:inputType="number" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView51"
                 android:layout_width="5px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -139,7 +142,7 @@
                 android:inputType="number" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView61"
                 android:layout_width="10px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -171,7 +174,7 @@
                 android:inputType="number" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView32"
                 android:layout_width="5px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -187,7 +190,7 @@
                 android:inputType="number" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView52"
                 android:layout_width="5px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -203,7 +206,7 @@
                 android:inputType="number" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView62"
                 android:layout_width="10px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
