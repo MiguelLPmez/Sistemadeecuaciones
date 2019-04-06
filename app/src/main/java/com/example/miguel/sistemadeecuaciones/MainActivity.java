@@ -10,9 +10,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    EditText a11, a12, a13, a21, a22, a23, a31, a32, a33, b1, b2, b3, x0, y0, z0, tol, itmax;
-    int x1, x2, x3, x4, x5, x6, x7, x8, x9, a, b, c, xo, yo, zo, tole, imax;
-    TextView X1, X2, X3;
+    EditText a1, a2, a3, a4, a5, a6, a7, a8, a9, a, b, c, xo, yo, zo, tole, imax;
+    int x1, x2, x3, x4, x5, x6, x7, x8, x9, x, y, z, xO, yO, zO, tolE, iMax;
+    TextView X1R, X2R, X3R;
     RadioButton jacobi, gauss;
     RadioGroup rGroupMetodo;
     Button botonCalcular;
@@ -22,34 +22,37 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        a11 = findViewById(R.id.a11);
-        a12 = findViewById(R.id.a12);
-        a13 = findViewById(R.id.a13);
-        a21 = findViewById(R.id.a21);
-        a22 = findViewById(R.id.a22);
-        a23 = findViewById(R.id.a23);
-        a31 = findViewById(R.id.a31);
-        a32 = findViewById(R.id.a32);
-        a33 = findViewById(R.id.a33);
-        b1 = findViewById(R.id.b1);
-        b2 = findViewById(R.id.b2);
-        b3 = findViewById(R.id.b3);
-        x0 = findViewById(R.id.x0);
-        y0 = findViewById(R.id.y0);
-        z0 = findViewById(R.id.z0);
-        tol = findViewById(R.id.tol);
-        itmax = findViewById(R.id.itmax);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        a1 = findViewById(R.id.a11);
+        a2 = findViewById(R.id.a12);
+        a3 = findViewById(R.id.a13);
+        a4 = findViewById(R.id.a21);
+        a5 = findViewById(R.id.a22);
+        a6 = findViewById(R.id.a23);
+        a7 = findViewById(R.id.a31);
+        a8 = findViewById(R.id.a32);
+        a9 = findViewById(R.id.a33);
+        a = findViewById(R.id.b1);
+        b = findViewById(R.id.b2);
+        c = findViewById(R.id.b3);
+        xo = findViewById(R.id.x0);
+        yo = findViewById(R.id.y0);
+        zo = findViewById(R.id.z0);
+        tole = findViewById(R.id.tol);
+        imax = findViewById(R.id.itmax);
+        X1R = findViewById(R.id.resultx1);
+        X2R = findViewById(R.id.resultx2);
+        X3R = findViewById(R.id.resultx3);
         rGroupMetodo = findViewById(R.id.rGroupMetodo);
+        jacobi = findViewById(R.id.jacobi);
+        gauss = findViewById(R.id.gauss);
         botonCalcular = findViewById(R.id.botonCalcular);
-        X1 = findViewById(R.id.resultx1);
-        X1 = findViewById(R.id.resultx2);
-        X1 = findViewById(R.id.resultx3);
+        botonCalcular.setEnabled(false);
 
         jacobiM = new MetodoDeJacobi();
         gaussM = new MetodoDeGauss();
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
     }
 
     /**
@@ -58,60 +61,64 @@ public class MainActivity extends AppCompatActivity {
      * checkBox
      */
     private boolean verificacionDeDatos(){
-        if(a11.getText().length()==0 || a12.getText().length()==0 || a13.getText().length()==0 ||
-            a21.getText().length()==0 || a22.getText().length()==0 || a23.getText().length()==0 ||
-            a31.getText().length()==0 || a32.getText().length()==0 || a33.getText().length()==0 ||
-            b1.getText().length()==0 || b2.getText().length()==0 || b3.getText().length()==0 ||
-            x0.getText().length()==0 || y0.getText().length()==0 || z0.getText().length()==0 ||
-            tol.getText().length()==0 || itmax.getText().length()==0) {
+        return a1.getText().length()!=0 && a2.getText().length()!=0 && a3.getText().length()!=0 &&
+                a4.getText().length()!=0 && a5.getText().length()!=0 && a6.getText().length()!=0 &&
+                a7.getText().length()!=0 && a8.getText().length()!=0 && a9.getText().length()!=0 &&
+                a.getText().length()!=0 && b.getText().length()!=0 && c.getText().length()!=0 &&
+                xo.getText().length()!=0 && yo.getText().length()!=0 && zo.getText().length()!=0 &&
+                tole.getText().length()!=0 && imax.getText().length()!=0;
+    }
+
+    public void rGroupPerformed(View v){
+        if(verificacionDeDatos())
+            botonCalcular.setEnabled(true);
+        else
+            rGroupMetodo.clearCheck();
+    }
+
+    public void calculatePerformed(View v) {
+        if (verificacionDeDatos()) {
+            x1 = Integer.parseInt(a1.getText().toString());
+            x2 = Integer.parseInt(a2.getText().toString());
+            x3 = Integer.parseInt(a3.getText().toString());
+            x4 = Integer.parseInt(a4.getText().toString());
+            x5 = Integer.parseInt(a5.getText().toString());
+            x6 = Integer.parseInt(a6.getText().toString());
+            x7 = Integer.parseInt(a7.getText().toString());
+            x8 = Integer.parseInt(a8.getText().toString());
+            x9 = Integer.parseInt(a9.getText().toString());
+            x = Integer.parseInt(a.getText().toString());
+            y = Integer.parseInt(b.getText().toString());
+            z = Integer.parseInt(c.getText().toString());
+            xO = Integer.parseInt(xo.getText().toString());
+            yO = Integer.parseInt(yo.getText().toString());
+            zO = Integer.parseInt(zo.getText().toString());
+            tolE = Integer.parseInt(tole.getText().toString());
+            iMax = Integer.parseInt(imax.getText().toString());
+
+            sistema = new SistemaDeEcuaciones(new double[][]{{x1, x2, x3, x},
+                    {x4, x5, x6, y},
+                    {x7, x8, x9, z}});
+            int id = rGroupMetodo.getCheckedRadioButtonId();
+            if (id == jacobi.getId() && verificacionDeDatos()) {
+                double[] solución;
+                solución = MetodoDeJacobi.ObtenerSolucion(sistema, xO, yO, zO, tolE, iMax);
+                X1R.setText("X1: " + solución[0]);
+                X2R.setText("X2: " + solución[1]);
+                X3R.setText("X3: " + solución[2]);
+            } else if (id == gauss.getId() && verificacionDeDatos()) {
+                double[] solución;
+                solución = MetodoDeGauss.ObtenerSolucion(sistema, xO, yO, zO, tolE, iMax);
+                X1R.setText("X1: " + solución[0]);
+                X2R.setText("X2: " + solución[1]);
+                X3R.setText("X3: " + solución[2]);
+            }
+        }else {
             botonCalcular.setEnabled(false);
             rGroupMetodo.clearCheck();
-            return false;
-        }else
-        return true;
-    }
-
-    private void convertirStrings(){
-        x1 = Integer.parseInt(a11.getText().toString());
-        x2 = Integer.parseInt(a12.getText().toString());
-        x3 = Integer.parseInt(a13.getText().toString());
-        x4 = Integer.parseInt(a21.getText().toString());
-        x5 = Integer.parseInt(a22.getText().toString());
-        x6 = Integer.parseInt(a23.getText().toString());
-        x7 = Integer.parseInt(a31.getText().toString());
-        x8 = Integer.parseInt(a32.getText().toString());
-        x9 = Integer.parseInt(a33.getText().toString());
-        a = Integer.parseInt(b1.getText().toString());
-        b = Integer.parseInt(b2.getText().toString());
-        c = Integer.parseInt(b3.getText().toString());
-        xo = Integer.parseInt(x0.getText().toString());
-        yo = Integer.parseInt(y0.getText().toString());
-        zo = Integer.parseInt(z0.getText().toString());
-        tole = Integer.parseInt(tol.getText().toString());
-        imax = Integer.parseInt(itmax.getText().toString());
-    }
-
-
-
-    public void calculatePerformed(View v){
-        convertirStrings();
-        sistema = new SistemaDeEcuaciones(new double[][]{{x1, x2, x3, a},
-                {x4, x5, x6, b},
-                {x7, x8, x9, c}});
-        int id = rGroupMetodo.getCheckedRadioButtonId();
-        verificacionDeDatos();
-        if(id==jacobi.getId()&&verificacionDeDatos()==true){
-            double[] solución;
-            solución = MetodoDeJacobi.ObtenerSolucion(sistema,xo,yo,zo,tole,imax);
-            X1.setText("X1: "+solución);
-            X2.setText("X2: "+solución);
-            X3.setText("X3: "+solución);
-        }else if(id==jacobi.getId()&&verificacionDeDatos()==true){
-            double[] solución;
-            solución = MetodoDeGauss.ObtenerSolucion(sistema,xo,xo,zo,tole,imax);
-            X1.setText("X1: "+solución);
-            X2.setText("X2: "+solución);
-            X3.setText("X3: "+solución);
+            X1R.setText("X1");
+            X2R.setText("X2");
+            X3R.setText("X3");
         }
     }
 
