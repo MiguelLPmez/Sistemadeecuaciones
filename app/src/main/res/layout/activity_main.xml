@@ -342,7 +342,7 @@
                 android:id="@+id/jacobi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="calculatePerformed"
+                android:onClick="rGroupPerformed"
                 android:layout_weight="1"
                 android:text="Jacobi" />
 
@@ -350,7 +350,7 @@
                 android:id="@+id/gauss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="calculatePerformed"
+                android:onClick="rGroupPerformed"
                 android:layout_weight="1"
                 android:text="Gauss-Seidel" />
         </RadioGroup>
@@ -369,7 +369,7 @@
             android:layout_width="match_parent"
             android:layout_height="100px"
             android:gravity="center_vertical"
-            android:text="X1 = "
+            android:text="X1: "
             android:textSize="16sp" />
 
         <TextView
@@ -377,7 +377,7 @@
             android:layout_width="match_parent"
             android:layout_height="100px"
             android:gravity="center_vertical"
-            android:text="X2 = "
+            android:text="X2:"
             android:textSize="16sp" />
 
         <TextView
@@ -385,15 +385,16 @@
             android:layout_width="match_parent"
             android:layout_height="100px"
             android:gravity="center_vertical"
-            android:text="X3 = "
+            android:text="X3:"
             android:textSize="16sp" />
 
         <Button
             android:id="@+id/botonCalcular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calculate"
             android:onClick="calculatePerformed"
+            android:text="Calculate"
+            android:enabled="false"
             android:textAllCaps="true" />
 
     </LinearLayout>
