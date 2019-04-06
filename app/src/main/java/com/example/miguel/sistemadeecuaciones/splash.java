@@ -11,7 +11,7 @@ import javax.xml.datatype.Duration;
 
 public class splash extends AppCompatActivity {
 
-    private final int DURACION_SPLASH = 2000;
+    private final int DURACION_SPLASH = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
