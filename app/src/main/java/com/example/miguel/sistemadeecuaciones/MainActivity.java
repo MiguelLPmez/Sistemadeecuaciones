@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     EditText a1, a2, a3, a4, a5, a6, a7, a8, a9, a, b, c, xo, yo, zo, tole, imax;
-    int x1, x2, x3, x4, x5, x6, x7, x8, x9, x, y, z, xO, yO, zO, tolE, iMax;
+    int x1, x2, x3, x4, x5, x6, x7, x8, x9, x, y, z, xO, yO, zO, iMax;
+    double tolE;
     TextView X1R, X2R, X3R;
     RadioButton jacobi, gauss;
     RadioGroup rGroupMetodo;
@@ -93,26 +94,21 @@ public class MainActivity extends AppCompatActivity {
             xO = Integer.parseInt(xo.getText().toString());
             yO = Integer.parseInt(yo.getText().toString());
             zO = Integer.parseInt(zo.getText().toString());
-            tolE = Integer.parseInt(tole.getText().toString());
+            tolE = Double.parseDouble(tole.getText().toString());
             iMax = Integer.parseInt(imax.getText().toString());
 
             sistema = new SistemaDeEcuaciones(new double[][]{{x1, x2, x3, x},
                     {x4, x5, x6, y},
                     {x7, x8, x9, z}});
             int id = rGroupMetodo.getCheckedRadioButtonId();
-            if (id == jacobi.getId() && verificacionDeDatos()) {
-                double[] solución;
+            double[] solución = new double[3];
+            if (id == jacobi.getId() && verificacionDeDatos())
                 solución = MetodoDeJacobi.ObtenerSolucion(sistema, xO, yO, zO, tolE, iMax);
-                X1R.setText("X1: " + solución[0]);
-                X2R.setText("X2: " + solución[1]);
-                X3R.setText("X3: " + solución[2]);
-            } else if (id == gauss.getId() && verificacionDeDatos()) {
-                double[] solución;
+            else if (id == gauss.getId() && verificacionDeDatos())
                 solución = MetodoDeGauss.ObtenerSolucion(sistema, xO, yO, zO, tolE, iMax);
-                X1R.setText("X1: " + solución[0]);
-                X2R.setText("X2: " + solución[1]);
-                X3R.setText("X3: " + solución[2]);
-            }
+            X1R.setText("X1: " + solución[0]);
+            X2R.setText("X2: " + solución[1]);
+            X3R.setText("X3: " + solución[2]);
         }else {
             botonCalcular.setEnabled(false);
             rGroupMetodo.clearCheck();
