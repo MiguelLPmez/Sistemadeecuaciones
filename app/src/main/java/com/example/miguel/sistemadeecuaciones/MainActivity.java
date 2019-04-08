@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText a1, a2, a3, a4, a5, a6, a7, a8, a9, a, b, c, xo, yo, zo, tole, imax;
@@ -77,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
             rGroupMetodo.clearCheck();
     }
 
+    private boolean verificarDiagonal(){
+        if(Math.abs(x1) >= Math.abs(x2)+ Math.abs(x3) &&
+            Math.abs(x5) >= Math.abs(x4)+ Math.abs(x6) &&
+            Math.abs(x9) >= Math.abs(x7)+ Math.abs(x8)) return true;
+        return false;
+    }
+
     public void calculatePerformed(View v) {
         if (verificacionDeDatos()) {
             x1 = Integer.parseInt(a1.getText().toString());
@@ -88,27 +96,31 @@ public class MainActivity extends AppCompatActivity {
             x7 = Integer.parseInt(a7.getText().toString());
             x8 = Integer.parseInt(a8.getText().toString());
             x9 = Integer.parseInt(a9.getText().toString());
-            x = Integer.parseInt(a.getText().toString());
-            y = Integer.parseInt(b.getText().toString());
-            z = Integer.parseInt(c.getText().toString());
-            xO = Integer.parseInt(xo.getText().toString());
-            yO = Integer.parseInt(yo.getText().toString());
-            zO = Integer.parseInt(zo.getText().toString());
-            tolE = Double.parseDouble(tole.getText().toString());
-            iMax = Integer.parseInt(imax.getText().toString());
 
-            sistema = new SistemaDeEcuaciones(new double[][]{{x1, x2, x3, x},
-                    {x4, x5, x6, y},
-                    {x7, x8, x9, z}});
-            int id = rGroupMetodo.getCheckedRadioButtonId();
-            double[] solución = new double[3];
-            if (id == jacobi.getId() && verificacionDeDatos())
-                solución = MetodoDeJacobi.ObtenerSolucion(sistema, xO, yO, zO, tolE, iMax);
-            else if (id == gauss.getId() && verificacionDeDatos())
-                solución = MetodoDeGauss.ObtenerSolucion(sistema, xO, yO, zO, tolE, iMax);
-            X1R.setText("X1: " + solución[0]);
-            X2R.setText("X2: " + solución[1]);
-            X3R.setText("X3: " + solución[2]);
+            if(verificarDiagonal()){
+                x = Integer.parseInt(a.getText().toString());
+                y = Integer.parseInt(b.getText().toString());
+                z = Integer.parseInt(c.getText().toString());
+                xO = Integer.parseInt(xo.getText().toString());
+                yO = Integer.parseInt(yo.getText().toString());
+                zO = Integer.parseInt(zo.getText().toString());
+                tolE = Double.parseDouble(tole.getText().toString());
+                iMax = Integer.parseInt(imax.getText().toString());
+
+                sistema = new SistemaDeEcuaciones(new double[][]{{x1, x2, x3, x},
+                        {x4, x5, x6, y},
+                        {x7, x8, x9, z}});
+                int id = rGroupMetodo.getCheckedRadioButtonId();
+                double[] solución = new double[3];
+                if (id == jacobi.getId() && verificacionDeDatos())
+                    solución = MetodoDeJacobi.ObtenerSolucion(sistema, xO, yO, zO, tolE, iMax);
+                else if (id == gauss.getId() && verificacionDeDatos())
+                    solución = MetodoDeGauss.ObtenerSolucion(sistema, xO, yO, zO, tolE, iMax);
+                X1R.setText("X1: " + solución[0]);
+                X2R.setText("X2: " + solución[1]);
+                X3R.setText("X3: " + solución[2]);
+            }
+            else Toast.makeText(getApplicationContext(), "Respeta el numero mayor en la diagonal", Toast.LENGTH_LONG).show();
         }else {
             botonCalcular.setEnabled(false);
             rGroupMetodo.clearCheck();
